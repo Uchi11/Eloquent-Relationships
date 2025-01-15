@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
     	return $this->hasOne(Phone::class);
     }
+    
+    /**
+     * roles
+     *
+     * @return void
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
 }
