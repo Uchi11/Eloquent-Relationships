@@ -13,7 +13,9 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Atribut yang dapat di-*mass assignable*.
+     * 
+     * Atribut ini dapat diisi secara massal, misalnya saat menggunakan metode `create()` atau `update()`.
      *
      * @var array<int, string>
      */
@@ -24,7 +26,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Atribut yang harus disembunyikan saat model diserialisasi.
+     * 
+     * Biasanya digunakan untuk menyembunyikan informasi sensitif seperti password.
      *
      * @var array<int, string>
      */
@@ -34,7 +38,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * Atribut yang akan di-*cast* ke tipe data tertentu.
+     * 
+     * Misalnya, `email_verified_at` akan otomatis dikonversi ke tipe `datetime`.
      *
      * @var array<string, string>
      */
@@ -43,9 +49,11 @@ class User extends Authenticatable
     ];
     
     /**
-     * phone
+     * Relasi satu-ke-satu antara User dan Phone.
+     * 
+     * Setiap user memiliki satu phone.
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function phone()
     {
@@ -53,9 +61,12 @@ class User extends Authenticatable
     }
     
     /**
-     * roles
+     * Relasi many-to-many antara User dan Role.
+     * 
+     * Satu user bisa memiliki banyak role, dan satu role bisa dimiliki banyak user.
+     * Relasi ini menggunakan tabel pivot 'user_role' dengan 'user_id' dan 'role_id'.
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
     {

@@ -7,26 +7,26 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Menjalankan migrasi untuk membuat tabel 'password_resets'.
      *
      * @return void
      */
     public function up()
     {
         Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+            $table->string('email')->index(); // Kolom email dengan index untuk mempercepat pencarian
+            $table->string('token'); // Token reset password yang dikirim ke email pengguna
+            $table->timestamp('created_at')->nullable(); // Waktu pembuatan token, nullable untuk fleksibilitas
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Membalikkan migrasi dengan menghapus tabel 'password_resets'.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('password_resets'); // Menghapus tabel jika rollback dilakukan
     }
 };

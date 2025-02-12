@@ -7,30 +7,30 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Menjalankan migrasi untuk membuat tabel 'failed_jobs'.
      *
      * @return void
      */
     public function up()
     {
         Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->id();
-            $table->string('uuid')->unique();
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
-            $table->timestamp('failed_at')->useCurrent();
+            $table->id(); // Primary key auto-increment
+            $table->string('uuid')->unique(); // UUID unik untuk mengidentifikasi setiap job yang gagal
+            $table->text('connection'); // Menyimpan nama koneksi (misalnya, database, Redis, dll.)
+            $table->text('queue'); // Menyimpan nama antrian tempat job dijalankan
+            $table->longText('payload'); // Data lengkap dari job yang gagal
+            $table->longText('exception'); // Detail lengkap tentang error atau exception yang menyebabkan job gagal
+            $table->timestamp('failed_at')->useCurrent(); // Timestamp kapan job gagal, otomatis diisi dengan waktu saat ini
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Membalikkan migrasi dengan menghapus tabel 'failed_jobs'.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('failed_jobs'); // Menghapus tabel saat rollback migrasi
     }
 };
